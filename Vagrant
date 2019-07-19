@@ -1,2 +1,12 @@
 Intro : https://docs.google.com/document/d/123wYK0aqfsnXdOCeyehocyCaJp51_8pBXA9vxYY10Hw/edit?usp=sharing
 
+$ vagrant --version
+Vagrant 2.2.5
+
+$ cd centos/
+
+$ vagrant init centos/7
+
+$ vagrant up
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
