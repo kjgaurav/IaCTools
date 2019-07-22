@@ -197,3 +197,44 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
+
+Managing Containers
+
+$ docker stop 77f95e446a7a
+77f95e446a7a
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+77f95e446a7a        ubuntu              "/bin/bash"         15 minutes ago      Exited (0) 21 seconds ago                       practical_shtern
+789f8a9e8ada        centos              "/bin/bash"         25 minutes ago      Exited (0) 22 minutes ago                       objective_keldysh
+58879f519804        hello-world         "/hello"            2 hours ago         Exited (0) 2 hours ago                          romantic_khayyam
+
+$ docker rm 58879f519804
+58879f519804
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+77f95e446a7a        ubuntu              "/bin/bash"         15 minutes ago      Exited (0) 59 seconds ago                       practical_shtern
+789f8a9e8ada        centos              "/bin/bash"         25 minutes ago      Exited (0) 23 minutes ago                       objective_keldysh
+
+$ docker run -dt --name container1 ubuntu
+4195f23de30cf900903cd61db96945fc02c2be739942d90548a320421e8561a0
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+4195f23de30c        ubuntu              "/bin/bash"         6 seconds ago       Up 5 seconds                                    container1
+77f95e446a7a        ubuntu              "/bin/bash"         17 minutes ago      Exited (0) 3 minutes ago                        practical_shtern
+789f8a9e8ada        centos              "/bin/bash"         27 minutes ago      Exited (0) 25 minutes ago                       objective_keldysh
+
+$ docker run -dt --name container2 --hostname web ubuntu
+623081dc80047afb99523c36f7f99c792a81e04f48d3dc17cbceb8789100fb87
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                      PORTS               NAMES
+623081dc8004        ubuntu              "/bin/bash"         5 seconds ago        Up 4 seconds                                    container2
+4195f23de30c        ubuntu              "/bin/bash"         About a minute ago   Up About a minute                               container1
+77f95e446a7a        ubuntu              "/bin/bash"         19 minutes ago       Exited (0) 4 minutes ago                        practical_shtern
+789f8a9e8ada        centos              "/bin/bash"         29 minutes ago       Exited (0) 26 minutes ago                       objective_keldysh
+
+$ docker exec -it 623081dc8004 bash
+root@web:/# hostname
+web
+
+
