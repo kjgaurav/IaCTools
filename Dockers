@@ -1,1 +1,90 @@
 Docker Intro: https://docs.google.com/document/d/1BYFplxkrE3e03pRkSaFjRPx_SA0ObcX3kVQC85wOUvg/edit?usp=sharing
+
+Setting Up Docker
+$ curl -fsSL get.docker.com -o get-docker.sh
+$ ls -ltr
+total 16
+-rw-rw-r--. 1 rsa-key-20190610 rsa-key-20190610 13185 Jul 22 07:27 get-docker.sh
+
+$ sh get-docker.sh
+
+$ sudo usermod -aG docker rsa-key-20190610
+$ docker version
+Client:
+ Version:           18.09.8
+ API version:       1.39
+ Go version:        go1.10.8
+ Git commit:        0dd43dd87f
+ Built:             Wed Jul 17 17:40:31 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+$ sudo systemctl start docker
+$ sudo docker version
+Client:
+ Version:           18.09.8
+ API version:       1.39
+ Go version:        go1.10.8
+ Git commit:        0dd43dd87f
+ Built:             Wed Jul 17 17:40:31 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          18.09.8
+  API version:      1.39 (minimum version 1.12)
+  Go version:       go1.10.8
+  Git commit:       0dd43dd
+  Built:            Wed Jul 17 17:10:42 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+
+
+$ sudo docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 18.09.8
+Storage Driver: overlay2
+ Backing Filesystem: xfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: 894b81a4b802e4eb2a91d1ce216b8817763c29fb
+runc version: 425e105d5a03fabd737a126ad93d62a9eeede87f
+init version: fec3683
+Security Options:
+ seccomp
+  Profile: default
+Kernel Version: 3.10.0-957.21.3.el7.x86_64
+Operating System: CentOS Linux 7 (Core)
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 3.455GiB
+Name: docker
+ID: M75O:ADVL:BAVR:HTTL:KG7U:E2R6:N3ER:YKZ7:YOIR:X5AP:DAMP:U7XQ
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Labels:
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+Product License: Community Engine
+
