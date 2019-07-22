@@ -137,3 +137,63 @@ $ docker container ls -a
 CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                          PORTS               NAMES
 58879f519804        hello-world         "/hello"            About a minute ago   Exited (0) About a minute ago                       romantic_khayyam
 
+Working with Containers
+
+$ docker run -it centos
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+8ba884070f61: Pull complete
+Digest: sha256:a799dd8a2ded4a83484bbae769d97655392b3f86533ceb7dd96bbac929809f3c
+Status: Downloaded newer image for centos:latest
+[root@789f8a9e8ada /]#
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+789f8a9e8ada        centos              "/bin/bash"         About a minute ago   Up About a minute                       objective_keldysh
+
+[root@789f8a9e8ada /]# exit
+exit
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                         PORTS               NAMES
+789f8a9e8ada        centos              "/bin/bash"         2 minutes ago       Exited (0) 16 seconds ago                          objective_keldysh
+58879f519804        hello-world         "/hello"            About an hour ago   Exited (0) About an hour ago                       romantic_khayyam
+
+$ docker run -dt ubuntu
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+5b7339215d1d: Pull complete
+14ca88e9f672: Pull complete
+a31c3b1caad4: Pull complete
+b054a26005b7: Pull complete
+Digest: sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
+Status: Downloaded newer image for ubuntu:latest
+77f95e446a7aa954d2ea39d2e3e937aec4a8ca1d3947f715a53a3cd473b203c2
+
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              4c108a37151f        4 weeks ago         64.2MB
+centos              latest              9f38484d220f        4 months ago        202MB
+hello-world         latest              fce289e99eb9        6 months ago        1.84kB
+
+$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                         PORTS               NAMES
+77f95e446a7a        ubuntu              "/bin/bash"         21 seconds ago      Up 20 seconds                                      practical_shtern
+789f8a9e8ada        centos              "/bin/bash"         10 minutes ago      Exited (0) 7 minutes ago                           objective_keldysh
+58879f519804        hello-world         "/hello"            About an hour ago   Exited (0) About an hour ago                       romantic_khayyam
+
+$ docker exec -it 77f95e446a7a bash
+
+root@77f95e446a7a:/# cat /etc/os-release
+NAME="Ubuntu"
+VERSION="18.04.2 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.2 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
