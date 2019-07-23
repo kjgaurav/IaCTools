@@ -238,3 +238,63 @@ root@web:/# hostname
 web
 
 
+Mounting Volume
+
+
+$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: active (running) since Tue 2019-07-23 09:39:17 UTC; 6s ago
+     Docs: https://docs.docker.com
+ Main PID: 3314 (dockerd)
+    Tasks: 11
+   Memory: 118.8M
+   CGroup: /system.slice/docker.service
+           └─3314 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Jul 23 09:39:16 docker dockerd[3314]: time="2019-07-23T09:39:16.183979615Z" level=info msg="pickfirstBalancer: HandleSubConnStateChange: 0xc42061...dule=grpc
+Jul 23 09:39:16 docker dockerd[3314]: time="2019-07-23T09:39:16.234953783Z" level=info msg="[graphdriver] using prior storage driver: overlay2"
+Jul 23 09:39:16 docker dockerd[3314]: time="2019-07-23T09:39:16.411516424Z" level=info msg="Graph migration to content-addressability took 0.00 seconds"
+Jul 23 09:39:16 docker dockerd[3314]: time="2019-07-23T09:39:16.412899392Z" level=info msg="Loading containers: start."
+Jul 23 09:39:17 docker dockerd[3314]: time="2019-07-23T09:39:17.333402743Z" level=info msg="Default bridge (docker0) is assigned with an IP addre... address"
+Jul 23 09:39:17 docker dockerd[3314]: time="2019-07-23T09:39:17.603871438Z" level=info msg="Loading containers: done."
+Jul 23 09:39:17 docker dockerd[3314]: time="2019-07-23T09:39:17.789401377Z" level=info msg="Docker daemon" commit=0dd43dd graphdriver(s)=overlay2...n=18.09.8
+Jul 23 09:39:17 docker dockerd[3314]: time="2019-07-23T09:39:17.789959669Z" level=info msg="Daemon has completed initialization"
+Jul 23 09:39:17 docker dockerd[3314]: time="2019-07-23T09:39:17.819942277Z" level=info msg="API listen on /var/run/docker.sock"
+Jul 23 09:39:17 docker systemd[1]: Started Docker Application Container Engine.
+Hint: Some lines were ellipsized, use -l to show in full.
+
+
+$ docker volume ls
+DRIVER              VOLUME NAME
+
+$ docker run -dt --name c2 -v /gaurav ubuntu
+684ba0bb7217b347827411c7a50e9c71ea4fbde688b5d8a89fd6c6b23899a052
+
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               f91a11c1710f211cfcf95709202f2aa3a4d1b9b4e082f8195c81a4f0b5d82b13
+
+$ docker stop c2
+c2
+
+$ docker rm c2
+c2
+
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               f91a11c1710f211cfcf95709202f2aa3a4d1b9b4e082f8195c81a4f0b5d82b13
+
+$ docker volume inspect f91a11c1710f211cfcf95709202f2aa3a4d1b9b4e082f8195c81a4f0b5d82b13
+[
+    {
+        "CreatedAt": "2019-07-23T09:45:06Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/f91a11c1710f211cfcf95709202f2aa3a4d1b9b4e082f8195c81a4f0b5d82b13/_data",
+        "Name": "f91a11c1710f211cfcf95709202f2aa3a4d1b9b4e082f8195c81a4f0b5d82b13",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
